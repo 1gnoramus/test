@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <form id="dataForm" method="post" action="/data">
+        <label for="timeInput">Time:</label>
+        <input type="text" id="timeInput" name="time" required><br>
+    
+        <label for="countryInput">Country:</label>
+        <input type="text" id="countryInput" name="country" required><br>
+    
+        <label for="languageInput">Language:</label>
+        <input type="text" id="languageInput" name="language" required><br>
+    
+        <button type="submit">Submit</button>
+      </form>
+    
+      <h2>Data Table:</h2>
+
+      <script>
+        $(document).ready(function() {
+       $.get('/data', function(data) {
+         const tableBody = $('#dataTable tbody');
+   
+         data.forEach(function(row) {
+           const newRow = $('<tr>');
+           newRow.append(`<td>${row.time}</td>`);
+           newRow.append(`<td>${row.country}</td>`);
+           newRow.append(`<td>${row.language}</td>`);
+           tableBody.append(newRow);
+         });
+       });
+     });
+       </script>
+      <table id="dataTable" >
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Country</th>
+            <th>Language</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+</body>
+</html>
